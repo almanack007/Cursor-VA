@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Voice Agenda – Enterprise Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app">
+    <aside class="sidebar" role="navigation" aria-label="Primary">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <span class="brand-name">Voice Agenda</span>
+      </div>
+      <nav class="nav">
+        <button class="nav-item active" data-target="dashboard" aria-current="page">Dashboard</button>
+        <button class="nav-item" data-target="call-records">Call Records</button>
+        <button class="nav-item" data-target="service-insights">Service Insights</button>
+        <button class="nav-item" data-target="post-call-summaries">Post-Call Summaries</button>
+        <button class="nav-item" data-target="integrations">Integrations &amp; Workflows</button>
+        <button class="nav-item" data-target="settings">Settings &amp; Compliance</button>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-ghost" id="btn-quick-add">+ New</button>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <div class="search">
+          <input id="global-search" type="search" placeholder="Search calls, contacts, jobs..." aria-label="Global search" />
+        </div>
+        <div class="topbar-actions">
+          <button class="btn btn-accent" id="btn-create">Create</button>
+          <div class="avatar" title="Admin" aria-label="Account"></div>
+        </div>
+      </header>
+
+      <section id="dashboard" class="view active" aria-labelledby="tab-dashboard">
+        <div class="section-header">
+          <h2>Dashboard</h2>
+        </div>
+        <div class="kpi-grid">
+          <div class="card kpi-card">
+            <div class="kpi-top">
+              <span class="kpi-label">Total Calls</span>
+            </div>
+            <div class="kpi-value">1,284</div>
+            <div class="kpi-accent" aria-hidden="true"></div>
+          </div>
+          <div class="card kpi-card">
+            <div class="kpi-top">
+              <span class="kpi-label">Resolution Rate</span>
+            </div>
+            <div class="kpi-value">92%</div>
+            <div class="kpi-accent" aria-hidden="true"></div>
+          </div>
+          <div class="card kpi-card">
+            <div class="kpi-top">
+              <span class="kpi-label">Positive Sentiment</span>
+            </div>
+            <div class="kpi-value">76%</div>
+            <div class="kpi-accent" aria-hidden="true"></div>
+          </div>
+          <div class="card kpi-card">
+            <div class="kpi-top">
+              <span class="kpi-label">Avg. Handle Time</span>
+            </div>
+            <div class="kpi-value">02:18</div>
+            <div class="kpi-accent" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="chart-grid">
+          <div class="card" role="figure" aria-label="Call volume over time">
+            <div class="card-header">
+              <h3>Call Volume</h3>
+            </div>
+            <div class="chart-area">
+              <svg viewBox="0 0 400 160" class="chart-line" aria-hidden="true">
+                <defs>
+                  <linearGradient id="gradAccent" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.35"/>
+                    <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.05"/>
+                  </linearGradient>
+                </defs>
+                <polyline fill="url(#gradAccent)" stroke="none" points="0,120 20,110 40,100 60,105 80,95 100,85 120,90 140,70 160,75 180,65 200,60 220,58 240,64 260,62 280,68 300,66 320,74 340,70 360,78 380,75 400,80 400,160 0,160"/>
+                <polyline fill="none" stroke="var(--accent)" stroke-width="2.5" points="0,120 20,110 40,100 60,105 80,95 100,85 120,90 140,70 160,75 180,65 200,60 220,58 240,64 260,62 280,68 300,66 320,74 340,70 360,78 380,75 400,80"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card" role="figure" aria-label="Job type distribution">
+            <div class="card-header">
+              <h3>Job Types</h3>
+            </div>
+            <div class="chart-area chart-bars">
+              <div class="bar">
+                <span class="bar-label">Domestic</span>
+                <div class="bar-track"><div class="bar-fill is-domestic" style="width: 68%"></div></div>
+                <span class="bar-value">68%</span>
+              </div>
+              <div class="bar">
+                <span class="bar-label">Technical</span>
+                <div class="bar-track"><div class="bar-fill is-technical" style="width: 21%"></div></div>
+                <span class="bar-value">21%</span>
+              </div>
+              <div class="bar">
+                <span class="bar-label">Billing</span>
+                <div class="bar-track"><div class="bar-fill is-billing" style="width: 11%"></div></div>
+                <span class="bar-value">11%</span>
+              </div>
+            </div>
+          </div>
+          <div class="card" role="figure" aria-label="Sentiment breakdown">
+            <div class="card-header">
+              <h3>Sentiment</h3>
+            </div>
+            <div class="chart-area center">
+              <svg viewBox="0 0 160 160" class="chart-donut" aria-hidden="true">
+                <circle cx="80" cy="80" r="60" fill="none" stroke="#e0e0e0" stroke-width="18"/>
+                <circle cx="80" cy="80" r="60" fill="none" stroke="var(--accent)" stroke-width="18" stroke-dasharray="377" stroke-dashoffset="90" stroke-linecap="round"/>
+                <circle cx="80" cy="80" r="60" fill="none" stroke="#9e9e9e" stroke-width="18" stroke-dasharray="377" stroke-dashoffset="280" stroke-linecap="round"/>
+              </svg>
+              <div class="donut-legend">
+                <div><span class="dot dot-positive"></span> Positive</div>
+                <div><span class="dot dot-neutral"></span> Neutral</div>
+                <div><span class="dot dot-negative"></span> Negative</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="call-records" class="view" aria-labelledby="tab-call-records">
+        <div class="section-header">
+          <h2>Call Records</h2>
+          <div class="section-actions">
+            <button class="btn btn-ghost">Export</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table class="table" aria-label="All calls table">
+              <thead>
+                <tr>
+                  <th>Caller Name</th>
+                  <th>Call Type</th>
+                  <th>Date/Time</th>
+                  <th>Sentiment</th>
+                  <th>Resolution</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Jane Duncan</td>
+                  <td>Domestic Job Request</td>
+                  <td>2025-03-11 09:24</td>
+                  <td><span class="pill pill-positive">Positive</span></td>
+                  <td><span class="pill pill-done">Resolved</span></td>
+                </tr>
+                <tr>
+                  <td>Acme IT</td>
+                  <td>Technical Support</td>
+                  <td>2025-03-10 16:02</td>
+                  <td><span class="pill pill-neutral">Neutral</span></td>
+                  <td><span class="pill pill-open">Pending</span></td>
+                </tr>
+                <tr>
+                  <td>Blue Grid</td>
+                  <td>Billing</td>
+                  <td>2025-03-10 14:47</td>
+                  <td><span class="pill pill-negative">Negative</span></td>
+                  <td><span class="pill pill-open">Escalated</span></td>
+                </tr>
+                <tr>
+                  <td>HomeCare</td>
+                  <td>Domestic Job Request</td>
+                  <td>2025-03-09 10:11</td>
+                  <td><span class="pill pill-positive">Positive</span></td>
+                  <td><span class="pill pill-done">Resolved</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="service-insights" class="view" aria-labelledby="tab-service-insights">
+        <div class="section-header">
+          <h2>Service Insights</h2>
+        </div>
+        <div class="card-grid">
+          <div class="card insight-card">
+            <div class="card-header">
+              <h3>Domestic Job Requests</h3>
+            </div>
+            <div class="card-body">
+              <p class="muted">Top intents: Installations, Maintenance, On-site estimates</p>
+              <div class="metric-row">
+                <div class="metric"><span class="metric-value">456</span><span class="metric-label">This week</span></div>
+                <div class="metric"><span class="metric-value">+8%</span><span class="metric-label">vs last</span></div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-ghost">Drill down</button>
+            </div>
+          </div>
+          <div class="card insight-card">
+            <div class="card-header">
+              <h3>Technical Support</h3>
+            </div>
+            <div class="card-body">
+              <p class="muted">Top intents: Troubleshooting, Password reset, Connectivity</p>
+              <div class="metric-row">
+                <div class="metric"><span class="metric-value">201</span><span class="metric-label">This week</span></div>
+                <div class="metric"><span class="metric-value">-3%</span><span class="metric-label">vs last</span></div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-ghost">Drill down</button>
+            </div>
+          </div>
+          <div class="card insight-card">
+            <div class="card-header">
+              <h3>Billing</h3>
+            </div>
+            <div class="card-body">
+              <p class="muted">Top intents: Refunds, Invoices, Plan changes</p>
+              <div class="metric-row">
+                <div class="metric"><span class="metric-value">96</span><span class="metric-label">This week</span></div>
+                <div class="metric"><span class="metric-value">+2%</span><span class="metric-label">vs last</span></div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-ghost">Drill down</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="post-call-summaries" class="view" aria-labelledby="tab-post-call-summaries">
+        <div class="section-header">
+          <h2>Post-Call Summaries</h2>
+        </div>
+        <div class="summary-list">
+          <article class="card summary-card">
+            <div class="summary-meta">
+              <span class="muted">2025-03-11 09:24</span>
+              <span class="pill">Domestic</span>
+              <span class="pill pill-positive">Positive</span>
+            </div>
+            <h3>Jane Duncan — Install appointment</h3>
+            <p class="summary-preview">Transcript: "Hi, I need to schedule an installation this Friday..."</p>
+            <ul class="action-items">
+              <li>Confirm technician availability</li>
+              <li>Send calendar invite</li>
+            </ul>
+            <div class="summary-actions">
+              <button class="btn btn-ghost">Follow-up</button>
+              <button class="btn btn-accent btn-assign" data-summary-id="1">Assign</button>
+            </div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-meta">
+              <span class="muted">2025-03-10 16:02</span>
+              <span class="pill">Technical</span>
+              <span class="pill pill-neutral">Neutral</span>
+            </div>
+            <h3>Acme IT — Router offline</h3>
+            <p class="summary-preview">Transcript: "We lost connectivity on the 3rd floor routers..."</p>
+            <ul class="action-items">
+              <li>Create support ticket</li>
+              <li>Share troubleshooting guide</li>
+            </ul>
+            <div class="summary-actions">
+              <button class="btn btn-ghost">Follow-up</button>
+              <button class="btn btn-accent btn-assign" data-summary-id="2">Assign</button>
+            </div>
+          </article>
+          <article class="card summary-card">
+            <div class="summary-meta">
+              <span class="muted">2025-03-10 14:47</span>
+              <span class="pill">Billing</span>
+              <span class="pill pill-negative">Negative</span>
+            </div>
+            <h3>Blue Grid — Invoice discrepancy</h3>
+            <p class="summary-preview">Transcript: "Our latest invoice includes a service we didn't use..."</p>
+            <ul class="action-items">
+              <li>Verify invoice line items</li>
+              <li>Issue corrected statement</li>
+            </ul>
+            <div class="summary-actions">
+              <button class="btn btn-ghost">Follow-up</button>
+              <button class="btn btn-accent btn-assign" data-summary-id="3">Assign</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="integrations" class="view" aria-labelledby="tab-integrations">
+        <div class="section-header">
+          <h2>Integrations &amp; Workflows</h2>
+        </div>
+        <div class="integrations-grid">
+          <div class="card integration-tile">
+            <div class="tile-header">
+              <div class="tile-icon" aria-hidden="true">CRM</div>
+              <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+            </div>
+            <p class="muted">Sync contacts and accounts</p>
+          </div>
+          <div class="card integration-tile">
+            <div class="tile-header">
+              <div class="tile-icon" aria-hidden="true">TKT</div>
+              <label class="switch"><input type="checkbox" /><span class="slider"></span></label>
+            </div>
+            <p class="muted">Create and track tickets</p>
+          </div>
+          <div class="card integration-tile">
+            <div class="tile-header">
+              <div class="tile-icon" aria-hidden="true">CAL</div>
+              <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+            </div>
+            <p class="muted">Auto-schedule appointments</p>
+          </div>
+          <div class="card integration-tile">
+            <div class="tile-header">
+              <div class="tile-icon" aria-hidden="true">ERP</div>
+              <label class="switch"><input type="checkbox" /><span class="slider"></span></label>
+            </div>
+            <p class="muted">Orders and invoicing</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="settings" class="view" aria-labelledby="tab-settings">
+        <div class="section-header">
+          <h2>Settings &amp; Compliance</h2>
+        </div>
+        <div class="settings-grid">
+          <div class="card setting-card">
+            <div class="card-header"><h3>Security</h3></div>
+            <div class="card-body">
+              <label class="setting-row">
+                <span>Two-factor authentication</span>
+                <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+              </label>
+              <label class="setting-row">
+                <span>Single sign-on (SSO)</span>
+                <label class="switch"><input type="checkbox" /><span class="slider"></span></label>
+              </label>
+            </div>
+          </div>
+          <div class="card setting-card">
+            <div class="card-header"><h3>Data Retention</h3></div>
+            <div class="card-body">
+              <label class="setting-row">
+                <span>Call recordings retention</span>
+                <select>
+                  <option>30 days</option>
+                  <option selected>90 days</option>
+                  <option>180 days</option>
+                  <option>365 days</option>
+                </select>
+              </label>
+              <label class="setting-row">
+                <span>Auto-delete transcripts</span>
+                <label class="switch"><input type="checkbox" /><span class="slider"></span></label>
+              </label>
+            </div>
+          </div>
+          <div class="card setting-card">
+            <div class="card-header"><h3>Access Controls</h3></div>
+            <div class="card-body">
+              <label class="setting-row">
+                <span>Analyst role can export</span>
+                <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+              </label>
+              <label class="setting-row">
+                <span>Managers can edit workflows</span>
+                <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <h3 id="modal-title">Assign Follow-up</h3>
+      <div class="modal-body">
+        <label class="setting-row">
+          <span>Assignee</span>
+          <select id="assignee-select">
+            <option>Unassigned</option>
+            <option selected>Alex Johnson</option>
+            <option>Priya Singh</option>
+            <option>Chen Wu</option>
+          </select>
+        </label>
+        <label class="setting-row">
+          <span>Priority</span>
+          <select id="priority-select">
+            <option>Low</option>
+            <option selected>Medium</option>
+            <option>High</option>
+          </select>
+        </label>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="btn-cancel-modal">Cancel</button>
+        <button class="btn btn-accent" id="btn-confirm-assign">Assign</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
